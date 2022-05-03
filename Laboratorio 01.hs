@@ -20,29 +20,33 @@ inn []            =  error "empty list"
 length1 []        =  0
 length1 (_:l)     =  1 + length1 l
 
--- -- d)
--- list123 = (1 : 2) : 3 : []
+-- d)
+list123 = (1 : (2 : (3 : [])))
 
--- -- e)
--- []     ++! ys = ys
--- (x:xs) ++! ys = x : xs ++! ys
+-- e)
+[]     ++! ys = ys
+(x:xs) ++! ys = x : xs ++! ys
 
--- -- f)
+-- f)
+-- addToTail: d -> [d] -> [d]
 -- addToTail x xs = map +x tail xs
+-- addToTail x xs = head xs : x : tail xs
 
 -- -- g)
--- listmin xs = head . sort xs
+listmin xs = head (sort xs)
 
 -- -- h) (*)
--- smap f [] = []
--- smap f [x] = [f x]
--- smap f (x:xs) = f x : smap (smap f) xs
+smap f [] = []
+smap f [x] = [f x]
+smap f (x:xs) = (f x) : (smap f xs)
+
+--2. Definir las siguientes funciones y determinar su tipo:
+
+--a) five, que dado cualquier valor, devuelve 5
+five:: (Num d) => d -> d
+five _ = 5
 
 {-
-2. Definir las siguientes funciones y determinar su tipo:
-
-a) five, que dado cualquier valor, devuelve 5
-
 b) apply, que toma una función y un valor, y devuelve el resultado de
 aplicar la función al valor dado
 
