@@ -46,22 +46,51 @@ smap f (x:xs) = (f x) : (smap f xs)
 five:: (Num d) => d -> d
 five _ = 5
 
+-- b) apply, que toma una función y un valor, y devuelve el resultado de
+-- aplicar la función al valor dado
+
+apply::(Num d) => (d -> d) -> d -> d
+apply f x = f x
+
+-- c) ident, la función identidad
+
+ident::(Num d) => d -> d
+ident x = x
+
+
+-- d) first, que toma un par ordenado, y devuelve su primera componente
+first:: (a,b) -> a
+first (x,_) = x
+
+
+-- f) sign, la función signo
+sign::(Ord d,Num d) => (d -> Char)
+sign x | x >= 0 = '+'
+       | otherwise  = '-'
+
+-- g) vabs, la función valor absoluto (usando sign y sin usarla)
+vabsSign:: (Ord d, Num d) => d -> d
+vabsSign x = case (sign x) of
+                '+' -> x
+                '-' -> -x
+
+vabsNoSign:: (Ord d, Num d) => d -> d
+vabsNoSign x | x >= 0 = x
+             | otherwise = -x
+
+
+-- h) pot, que toma un entero y un número, y devuelve el resultado de elevar el segundo a la potencia dada por el primero
+pot:: (Num d) => Int -> d -> d
+pot x y = y ^ x 
+
+
 {-
-b) apply, que toma una función y un valor, y devuelve el resultado de
-aplicar la función al valor dado
-
-c) ident, la función identidad
-
-d) first, que toma un par ordenado, y devuelve su primera componente
-
 e) derive, que aproxima la derivada de una función dada en un punto dado
 
-f) sign, la función signo
 
-g) vabs, la función valor absoluto (usando sign y sin usarla)
 
-h) pot, que toma un entero y un número, y devuelve el resultado de
-elevar el segundo a la potencia dada por el primero
+
+
 
 i) xor, el operador de disyunción exclusiva
 
